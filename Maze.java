@@ -3,13 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class Maze {
   private char[][] maze;
-  public Maze(String file) {
-    try {
-      open(file);
-    }
-    catch (FileNotFoundException e) {
-      System.out.println("No file");
-    }
+  public Maze(String file) throws FileNotFoundException{
+    open(file);
   }
   public void open(String file) throws FileNotFoundException{
     File f = new File(file);
