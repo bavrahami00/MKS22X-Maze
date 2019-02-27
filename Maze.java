@@ -3,18 +3,29 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class Maze {
   private char[][] maze;
-  public char[][] open(String file) throws FileNotFoundException{
+  public Maze(String file) {
+    try {
+      open(file);
+    }
+    catch (FileNotFoundException e) {
+      System.out.println("No file");
+    }
+  }
+  public void open(String file) throws FileNotFoundException{
     File f = new File(file);
     Scanner s = new Scanner(f);
     int count = 0;
     while (s.hasNext()) {
       count++;
+      s.nextLine();
     }
     s = new Scanner(f);
     String t = s.nextLine();
-    char[][] maze = new char[count][t.length()];
-    s = new Scanner(f);
-    count = 0;
+    maze = new char[count][t.length()];
+    for (int x = 0; x < t.length(); x++) {
+      maze[0][x] = t.charAt(x);
+    }
+    count = 1;
     while (s.hasNext()) {
       t = s.nextLine();
       for (int x = 0; x < t.length(); x++) {
@@ -22,13 +33,12 @@ public class Maze {
       }
       count++;
     }
-    return maze;
   }
-  public void toString() {
+  public String toString() {
     String ans = "";
     for (int i = 0; i < maze[0].length; i++) {
       for (int x = 0; x < maze.length; x++) {
-        ans += maze[x][i];
+        ans += maze[i][x];
       }
       ans += "\n";
     }
