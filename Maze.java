@@ -45,9 +45,9 @@ public class Maze {
   }
   public String toString() {
     String ans = "";
-    for (int i = 0; i < maze[0].length; i++) {
-      for (int x = 0; x < maze.length; x++) {
-        ans += maze[i][x];
+    for (int x = 0; x < maze.length; x++) {
+      for (int i = 0; i < maze[0].length; i++) {
+        ans += maze[x][i];
       }
       ans += "\n";
     }
