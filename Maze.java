@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class Maze {
   private char[][] maze;
+  private boolean animate;
   public Maze(String file) throws FileNotFoundException{
     open(file);
   }
@@ -29,6 +30,19 @@ public class Maze {
       count++;
     }
   }
+  private void wait(int millis){
+    try {
+      Thread.sleep(millis);
+    }
+    catch (InterruptedException e) {}
+   }
+   public void setAnimate(boolean b){
+     animate = b;
+   }
+   public void clearTerminal(){
+    //erase terminal, go to top left of screen.
+    System.out.println("\033[2J\033[1;1H");
+  }
   public String toString() {
     String ans = "";
     for (int i = 0; i < maze[0].length; i++) {
@@ -51,6 +65,11 @@ public class Maze {
     return -2;
   }
   public int solve(int row, int col) {
+    if(animate){
+      clearTerminal();
+      System.out.println(this);
+      wait(20);
+    }
     for (int x = -1; x < 2; x++) {
       for (int i = -1; i < 2; i++) {
         if (x+1 == -1 || x+1 == 1) {
@@ -63,7 +82,9 @@ public class Maze {
             if (rec != -1) {
               return rec+1;
             }
-            maze[row+x][col+i] = '.';
+            else {
+              maze[row+x][col+i] = '.';
+            }
           }
         }
       }
