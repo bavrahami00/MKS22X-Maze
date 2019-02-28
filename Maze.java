@@ -39,4 +39,14 @@ public class Maze {
     }
     return ans;
   }
+  public int solve() {
+    for (int x = 0; x < maze.length; x++) {
+      for (int i = 0; i < maze[0].length; i++) {
+        if (maze[x][i] == 'S') {
+          maze[x][i] = '@';
+          return solve(x,i);
+        }
+      }
+    }
+  }
 }
