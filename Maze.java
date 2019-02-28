@@ -49,4 +49,22 @@ public class Maze {
       }
     }
   }
+  public int solve(int row, int col) {
+    for (int x = -1; x < 2; x += 2) {
+      for (int i = -1; i < 2; i += 2) {
+        if (board[row+x][col+i] == 'E') {
+          return 1;
+        }
+        if (board[row+x][col+i] == ' ') {
+          board[row+x][col+i] = '@';
+          int rec = solve(row+x,col+i);
+          if (rec != 1) {
+            return rec+1;
+          }
+          board[row+x][col+i] = '.';
+        }
+      }
+    }
+    return -1;
+  }
 }
